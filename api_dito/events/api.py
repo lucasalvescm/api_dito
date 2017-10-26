@@ -1,10 +1,10 @@
 from restless.dj import DjangoResource
 from restless.preparers import FieldsPreparer
 
-from movies.models import Movie
+from api_dito.events.models import Event
 
 
-class MovieResource(DjangoResource):
+class EventResource(DjangoResource):
     preparer = FieldsPreparer(fields={
         'id': 'id',
         'title': 'title',
@@ -12,4 +12,4 @@ class MovieResource(DjangoResource):
     })
 
     def list(self):
-        return Movie.objects.all()
+        return Event.objects.all()
