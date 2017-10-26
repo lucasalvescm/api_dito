@@ -1,0 +1,62 @@
+<html>
+    <head>
+        <title>DITO</title>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        
+    </head>
+    <body>
+        <div class="container">
+        <div class="card card-container">
+            <!-- <img class="profile-img-card" src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" alt="" /> -->
+            <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
+            <p id="profile-name" class="profile-name-card"></p>
+            <form class="form-signin">
+                <span id="reauth-email" class="reauth-email"></span>
+                <input id="input_text" class="form-control" list="name" placeholder="Email address" required autofocus>
+                <datalist id="name">
+				  
+				</datalist>
+                
+            </form><!-- /form -->
+            
+        </div><!-- /card-container -->
+    </div><!-- /container -->
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+
+    <script type="text/javascript">
+    	
+    	$("#input_text").keyup(function () {
+          var name = $(this).val();
+          if(name.length>2){
+          	$.ajax({
+		        url: '/events/',
+		        type:'get',
+		        data: {
+		          'name': name
+		        },
+		        dataType: 'json',
+		        success: function (data) {
+		          var dataList=[];
+		          var listInsert=[];
+		          for(i=0;i<data.objects.length;i++){
+		          	var st = data.objects[i]['title'];
+		          	listInsert.push(st);
+		          }
+		          $("#name").find("option").each(function(){dataList.push($(this).val())})
+				  var option = '<option value='+st+'>';
+				  for(j=0;j<listInsert.length;j++){
+				  	  if(dataList.includes(st)==false){
+				  	    $('#name').append('<option value="'+listInsert[j]+'">')
+					  }
+				  }
+     
+		        }
+	      	});
+          }
+	      
+
+    	});
+    </script>>
+    </body>
+</html>

@@ -16,11 +16,10 @@ Including another URLconf
 from django.conf.urls import url,include
 from django.contrib import admin
 from api_dito.events.api import EventResource
-from api_dito.views import get_home
+
 
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^',get_home),
-    url(r'events/', include(EventResource.urls())),
+    url(r'^', include('api_dito.events.urls',namespace='events')),
 ]
